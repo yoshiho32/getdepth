@@ -28,12 +28,10 @@
 #include "Compute.h"
 
 // センサ関連の処理
-//#include "KinectV1.h"
 #include "KinectV2.h"
-//#include "Ds325.h"
 
 // OpenCV によるビデオキャプチャに使うカメラ
-#define CAPTURE_DEVICE 1
+#define CAPTURE_DEVICE 0
 
 // 頂点位置の生成をシェーダ (position.frag) で行うなら 1
 #define GENERATE_POSITION 1
@@ -90,15 +88,6 @@ void GgApplication::run()
   int width, height;
   sensor.getDepthResolution(&width, &height);
 
-  // OpenCV によるビデオキャプチャを初期化する
-  cv::VideoCapture camera(CAPTURE_DEVICE);
-  if (!camera.isOpened()) throw std::runtime_error("ビデオカメラが見つかりません");
-
-  // カメラの初期設定
-  camera.grab();
-  const GLsizei capture_env_width(GLsizei(camera.get(CV_CAP_PROP_FRAME_WIDTH)));
-  const GLsizei capture_env_height(GLsizei(camera.get(CV_CAP_PROP_FRAME_HEIGHT)));
-
   // 描画に使うメッシュ
   const Mesh mesh(width, height, sensor.getCoordBuffer());
 
@@ -129,6 +118,11 @@ void GgApplication::run()
   // 頂点位置から法線ベクトルを計算するシェーダ
   const Calculate normal(width, height, "normal.frag");
 
+//#if USE_FILTER
+  // フィルターのシェーダ
+  //const Compute bilateral(width, height, "bilateral.comp");
+//#endif
+
   // 背景色を設定する
   glClearColor(background[0], background[1], background[2], background[3]);
 
@@ -158,6 +152,15 @@ void GgApplication::run()
     // 頂点位置の計算
     sensor.setVariance(variance + static_cast<GLfloat>(window.getArrowY()) * 0.01f);
     const GLuint positionTexture(sensor.getPosition());
+
+#if USE_FILTER
+	//バイラテラルフィルターの計算
+	bilateral.use();
+	//glUniform1i(0, 0);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, positionTexture);
+	const GLuint filteredTexture(bilateral.execute(positionTexture,GL_RGBA32F)[0]);
+#endif
 
     // 法線ベクトルの計算
     normal.use();

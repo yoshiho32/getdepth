@@ -69,7 +69,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\opencv-3.4.0\build\install\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\opencv-3.4.0\build\install\x64\vc15\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -87,10 +90,15 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)include;C:\Program Files\Microsoft SDKs\Kinect\v1.8\inc;C:\Program Files\Microsoft SDKs\Kinect\v2.0_1409\inc;C:\Program Files\SoftKinetic\DepthSenseSDK\include;C:\OpenCV\include</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(Projectdir)lib\$(Platform)\$(Configuration);C:\Program Files\Microsoft SDKs\Kinect\v1.8\lib\amd64;C:\Program Files\Microsoft SDKs\Kinect\v2.0_1409\Lib\x64;C:\Program Files\SoftKinetic\DepthSenseSDK\lib;C:\OpenCV\x64\vc14\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world340d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -126,10 +134,8 @@
     <ClInclude Include="Calculate.h" />
     <ClInclude Include="Compute.h" />
     <ClInclude Include="DepthCamera.h" />
-    <ClInclude Include="Ds325.h" />
     <ClInclude Include="gg.h" />
     <ClInclude Include="GgApplication.h" />
-    <ClInclude Include="KinectV1.h" />
     <ClInclude Include="KinectV2.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Rect.h" />
@@ -139,9 +145,7 @@
     <ClCompile Include="Calculate.cpp" />
     <ClCompile Include="Compute.cpp" />
     <ClCompile Include="DepthCamera.cpp" />
-    <ClCompile Include="Ds325.cpp" />
     <ClCompile Include="gg.cpp" />
-    <ClCompile Include="KinectV1.cpp" />
     <ClCompile Include="KinectV2.cpp" />
     <ClCompile Include="getdepth.cpp" />
     <ClCompile Include="main.cpp" />
@@ -155,8 +159,6 @@
     <None Include="normal.comp" />
     <None Include="normal.frag" />
     <None Include="position.comp" />
-    <None Include="position_ds.frag" />
-    <None Include="position_v1.frag" />
     <None Include="position_v2.frag" />
     <None Include="README.md" />
     <None Include="rectangle.vert" />

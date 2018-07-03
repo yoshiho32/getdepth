@@ -27,9 +27,6 @@
     <ClInclude Include="gg.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="KinectV1.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="KinectV2.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -40,9 +37,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Ds325.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="GgApplication.h">
@@ -62,9 +56,6 @@
     <ClCompile Include="gg.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="KinectV1.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="KinectV2.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -75,9 +66,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Ds325.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="getdepth.cpp">
@@ -122,13 +110,7 @@
     <None Include="position.comp">
       <Filter>シェーダー ファイル</Filter>
     </None>
-    <None Include="position_v1.frag">
-      <Filter>シェーダー ファイル</Filter>
-    </None>
     <None Include="position_v2.frag">
-      <Filter>シェーダー ファイル</Filter>
-    </None>
-    <None Include="position_ds.frag">
       <Filter>シェーダー ファイル</Filter>
     </None>
   </ItemGroup>
